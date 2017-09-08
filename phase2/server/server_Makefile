@@ -1,0 +1,16 @@
+all: server
+
+server: main.cpp server_socket.o server.o server_tools.o
+	g++ main.cpp server_socket.o server.o server_tools.o -o server
+
+server.o: server.cpp server.h
+	g++ -c server.cpp
+	
+server_socket.o: server_socket.cpp server_socket.h server_tools.h network_exception.h
+	g++ -c server_socket.cpp
+	
+server_tools.o: server_tools.cpp server_tools.h
+	g++ -c tools.cpp
+	
+clean:
+	rm *.o server
